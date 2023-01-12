@@ -1,12 +1,8 @@
 <?php
-
 namespace Cachesistemas\ChatbotWhatsappPhp;
- 
 
- 
 use PDO;
 use PDOException;
-
 
 
 class DB
@@ -17,7 +13,6 @@ class DB
 
         try {
             $conect  = new PDO("mysql:host=" . DB_HOST  . ";dbname=" . DB_BASE_NAME . "", DB_USER, DB_PASS);
-
             $conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $conect->exec("SET NAMES 'utf8';");
         } catch (PDOException $e) {
@@ -26,7 +21,7 @@ class DB
         }
         return  $conect;
     }
-    
+
 
     public function Query($sql)
     {
