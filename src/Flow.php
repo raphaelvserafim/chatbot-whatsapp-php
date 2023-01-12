@@ -2,53 +2,33 @@
 
 namespace Cachesistemas\ChatbotWhatsappPhp;
 
-use Cachesistemas\ChatbotWhatsappPhp\DB;
+use Cachesistemas\ChatbotWhatsappPhp\Send;
 
-class Flow extends DB
+
+class Flow
 {
 
-    public $phone;
-    public $dateTimeNow;
-    public $serviceID;
 
-
-    public function __construct()
+    public function stage($stageID)
     {
-        $this->dateTimeNow = date('Y-m-d H:i:s');
+        $send = new Send();
+        
+        switch ($stageID) {
+            case 1:
+                $this->welcomeMessage();
+                break;
+
+            default:
+                $send->whatsApp([["type" => "text", "message" => "Etapa não encontrada"]]);
+                break;
+        }
     }
 
 
-    public function checkService()
+    public function welcomeMessage()
     {
-        return   DB::Select("SELECT * FROM tb_attendance WHERE phone  = '$this->phone' AND situation = 1 ");
-    }
-
-    public function startService()
-    {
-        return   DB::Query("INSERT INTO  tb_attendance SET  phone  = '$this->phone', situation = 1 ");
-    }
-
-
-    public function endService()
-    {
-        return   DB::Query("UPDATE tb_attendance SET situation = 0 WHERE phone  = '$this->phone' AND situation = 1 ");
-    }
-
-
-
-    public function stage()
-    {
-        return   DB::Select("SELECT * FROM tb_stage WHERE attendance  =  $this->serviceID  ");
-    }
-
-
-    public function startStep()
-    {
-        return   DB::Query("INSERT INTO  tb_stage SET  attendance  = $this->serviceID , stage = 1 ");
-    }
-
-    public function changeStage(int $stage)
-    {
-        return   DB::Query("UPDATE tb_stage SET  stage  = $stage  WHERE attendance  = $this->serviceID  ");
+        $msg = [];
+        array_push($msg, ["type" => "text", "message" => "Olá seja bem vindo(a)"]);
+        return $msg;
     }
 }
