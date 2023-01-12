@@ -9,20 +9,23 @@ use Cachesistemas\ChatbotWhatsappPhp\Bot;
 class Flow
 {
 
-    public function startService(){
-
+    public function checkService()
+    {
     }
 
-    public function endService(){
-
+    public function startService()
+    {
     }
-    public function changeStage(){
 
+    public function endService()
+    {
+    }
+
+    public function changeStage()
+    {
     }
 
     public function stage()
     {
-
-
     }
 }
