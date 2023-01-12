@@ -3,23 +3,35 @@
 namespace Cachesistemas\ChatbotWhatsappPhp;
 
 use Cachesistemas\ChatbotWhatsappPhp\Send;
-
+use Cachesistemas\ChatbotWhatsappPhp\Model;
 
 class Flow
 {
 
+    public $send;
+    public $model;
+
+    public function __construct($phone)
+    {
+        $this->send  = new Send();
+        $this->model = new Model();
+
+        $this->model->phone = $phone;
+    }
+
 
     public function stage($stageID)
     {
-        $send = new Send();
-        
+
         switch ($stageID) {
             case 1:
                 $this->welcomeMessage();
                 break;
 
+
             default:
-                $send->whatsApp([["type" => "text", "message" => "Etapa não encontrada"]]);
+                $this->send->whatsApp([["type" => "text", "message" => "Etapa não encontrada"]]);
+                $this->model->endService();
                 break;
         }
     }
