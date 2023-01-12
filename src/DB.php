@@ -16,7 +16,7 @@ class DB
             $conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $conect->exec("SET NAMES 'utf8';");
         } catch (PDOException $e) {
-            echo json_encode(array("status" => false, "mensagem" => $e->getMessage()));
+            echo json_encode(array("status" => false, "message" => $e->getMessage()));
             die();
         }
         return  $conect;
@@ -31,7 +31,7 @@ class DB
             $stmt->execute();
             return  array("status" => true);
         } catch (PDOException $e) {
-            return array("status" => false, "mensagem" =>  $e->getMessage());
+            return array("status" => false, "message" =>  $e->getMessage());
         }
     }
 
@@ -41,10 +41,10 @@ class DB
         try {
             $stmt = $this->conectar()->prepare($sql);
             $stmt->execute();
-            return array("status" => true,  "consulta" => $stmt->fetchAll(PDO::FETCH_OBJ));
+            return array("status" => true,  "data" => $stmt->fetchAll(PDO::FETCH_OBJ));
         } catch (PDOException $e) {
 
-            return array("status" => false, "mensagem" =>  $e->getMessage());
+            return array("status" => false, "message" =>  $e->getMessage());
         }
     }
 }
