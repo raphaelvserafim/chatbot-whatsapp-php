@@ -1,0 +1,16 @@
+{
+    "name": "cachesistemas/chatbot-whatsapp-php",
+    "description": "ChatBot WhatsApp PHP",
+    "autoload": {
+        "psr-4": {
+            "Cachesistemas\\ChatbotWhatsappPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Raphael Serafim",
+            "email": "raphaelvserafim@gmail.com"
+        }
+    ],
+    "require": {}
+}
