@@ -2,15 +2,18 @@
 
 namespace Cachesistemas\ChatbotWhatsappPhp;
 
-use Cachesistemas\ChatbotWhatsappPhp\Bot;
+use Cachesistemas\ChatbotWhatsappPhp\DB;
 
-
-
-class Flow
+class Flow extends DB
 {
+
+    public $phone;
+
+
 
     public function checkService()
     {
+        return   DB::Select("SELECT * FROM tb_attendance WHERE phone  = '$this->phone' ");
     }
 
     public function startService()
