@@ -3,9 +3,8 @@
 namespace Cachesistemas\ChatbotWhatsappPhp;
 
 use NLTK\NLTK;
-
 use Rasa\Rasa;
-
+use SentimentAnalysis\SentimentAnalysis;
 
 class Bot
 {
@@ -29,5 +28,14 @@ class Bot
         $text = "I am looking for a cheap hotel in Paris";
         $intents = $rasa->nlu()->parse($text);
         print_r($intents);
+    }
+
+    public  function Sentiment()
+    {
+        $text       = "I love this product";
+        $sentiment  = new SentimentAnalysis();
+        $result     = $sentiment->categorise($text);
+
+        print_r($result);
     }
 }
