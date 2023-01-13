@@ -37,6 +37,11 @@ class Send
                         break;
 
 
+                    case 'image':
+                        $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'image', $msg[$i]["caption"]);
+                        break;
+
+
                     default:
                         # code...
                         break;
