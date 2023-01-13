@@ -49,6 +49,16 @@ class Send
                         $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'document', $msg[$i]["caption"]);
                         break;
 
+                    case 'button':
+                        $whatsapp->sendButton([
+                            "to" => $this->phone,
+                            "data" => [
+                                "text" => $msg[$i]["title"],
+                                "buttons" =>  $msg[$i]["buttons"],
+                                "footerText" => $msg[$i]["footer"]
+                            ]
+                        ]);
+                        break;
 
 
                     default:
