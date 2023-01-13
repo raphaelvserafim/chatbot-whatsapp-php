@@ -45,6 +45,10 @@ class Send
                         $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'video', $msg[$i]["caption"]);
                         break;
 
+                    case 'document':
+                        $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'document', $msg[$i]["caption"]);
+                        break;
+
 
 
                     default:
