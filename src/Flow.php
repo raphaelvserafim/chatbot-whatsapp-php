@@ -17,6 +17,17 @@ class Flow
         $this->model = new Model();
 
         $this->model->phone = $phone;
+
+
+        $check    = $this->model->checkService();
+
+        if (sizeof($check["data"]) == 0) {
+            $this->stage(1);
+        } else {
+            $check                  = $check["data"][0];
+            $this->model->serviceID = $check->id;
+            
+        }
     }
 
 
@@ -24,8 +35,15 @@ class Flow
     {
 
         switch ($stageID) {
+
             case 1:
-                $this->welcomeMessage();
+                $this->model->startService();
+                $this->send->whatsApp($this->welcomeMessage());
+                break;
+
+
+            case 2:
+
                 break;
 
 
@@ -43,8 +61,4 @@ class Flow
         array_push($msg, ["type" => "text", "message" => "Olá seja bem vindo(a)"]);
         return $msg;
     }
-
-
-
-    
 }
