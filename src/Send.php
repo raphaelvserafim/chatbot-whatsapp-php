@@ -29,6 +29,14 @@ class Send
                         $whatsapp->sendText($this->phone, $msg[$i]["message"]);
                         break;
 
+
+                    case 'audio':
+                        $whatsapp->sendPresence($this->phone, 'recording');
+                        sleep(2);
+                        $whatsapp->sendAudio($this->phone, $msg[$i]["url"], true);
+                        break;
+
+
                     default:
                         # code...
                         break;
