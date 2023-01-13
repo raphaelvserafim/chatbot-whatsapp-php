@@ -61,8 +61,19 @@ class Send
                         break;
 
 
-                    default:
-                        # code...
+                    case "list":
+                        $body = [
+                            "messageData" => [
+                                "to" => $this->phone,
+                                "buttonText" => $msg[$i]["name"],
+                                "text" => " ",
+                                "title" => $msg[$i]["title"],
+                                "description" => $msg[$i]["footer"],
+                                "sections" =>  $msg[$i]["sections"],
+                                "listType" => 0
+                            ]
+                        ];
+                        $whatsapp->sendList($body);
                         break;
                 }
             }
