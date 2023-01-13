@@ -61,7 +61,7 @@ class Send
                         break;
 
 
-                    case "list":
+                    case 'list':
                         $body = [
                             "messageData" => [
                                 "to" => $this->phone,
@@ -74,6 +74,10 @@ class Send
                             ]
                         ];
                         $whatsapp->sendList($body);
+                        break;
+
+                    case 'contact':
+                        $whatsapp->sendContact($this->phone, $msg[$i]["name"], $msg[$i]["number"]);
                         break;
                 }
             }
