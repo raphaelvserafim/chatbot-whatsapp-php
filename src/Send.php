@@ -106,5 +106,6 @@ class Send
 
     public function Telegram($msg)
     {
+        // EM BREVE
     }
 }
