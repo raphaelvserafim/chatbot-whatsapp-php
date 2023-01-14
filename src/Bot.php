@@ -14,6 +14,14 @@ class Bot
 
 
 
+    public function createLog($name, $logs)
+    {
+        $fp = fopen($name . '.json', "a+");
+        fwrite($fp, "\n\n\n\n" . json_encode($logs) . "\n\n\n");
+        fclose($fp);
+    }
+    
+
     public function NLTK()
     {
 
