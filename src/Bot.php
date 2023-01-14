@@ -29,7 +29,6 @@ class Bot
                 $result  = $this->treatDataWPP($data);
 
                 $this->createLog('php-input',  $result);
-
             }
         }
     }
@@ -38,7 +37,7 @@ class Bot
     {
 
         return [
-            "id" => $data["data"]["key"]["remoteJid"],
+            "id" => preg_replace('/[^0-9]/', '', $data["data"]["key"]["remoteJid"]),
             "name" => $data["data"]["pushName"],
             "text" =>  $data["data"]["msgContent"]["conversation"]
         ];
