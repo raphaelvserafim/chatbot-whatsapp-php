@@ -37,9 +37,10 @@ class Bot
     {
 
         return [
+            "network" => "whatsapp",
             "id" => preg_replace('/[^0-9]/', '', $data["data"]["key"]["remoteJid"]),
             "name" => $data["data"]["pushName"],
-            "text" =>  $data["data"]["msgContent"]["conversation"]
+            "text" => $data["data"]["msgContent"]["conversation"]
         ];
     }
 
