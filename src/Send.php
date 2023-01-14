@@ -11,11 +11,26 @@ class Send
     public $wpp_key;
     public $phone;
 
-    public function Message($msg)
+    public function Message($msg, $network)
+    {
+
+        if (sizeof($network) > 0) {
+            for ($i = 0; sizeof($network) > $i; $i++) {
+                switch ($network[$i]) {
+                    case 'whatsapp':
+                        $this->WhatsApp($msg);
+                        break;
+                }
+            }
+        }
+    }
+
+
+
+    public function WhatsApp($msg)
     {
 
         $whatsapp     = new WhatsApp(["server" =>  $this->wpp_server, "key" =>  $this->wpp_key]);
-
 
         if (sizeof($msg) > 0) {
 

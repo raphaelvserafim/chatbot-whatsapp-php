@@ -44,7 +44,7 @@ class Flow
         switch ($stageID) {
 
             case 1:
-                $this->send->Message($this->welcomeMessage());
+                $this->send->Message($this->welcomeMessage(), ['whatsapp']);
 
                 $this->model->changeStage(2);
                 break;
@@ -56,7 +56,7 @@ class Flow
 
 
             default:
-                $this->send->Message([["type" => "text", "message" => "Etapa não encontrada"]]);
+                $this->send->Message([["type" => "text", "message" => "Etapa não encontrada"]], ['whatsapp']);
                 $this->model->endService();
                 break;
         }
