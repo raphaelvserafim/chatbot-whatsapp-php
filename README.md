@@ -1,6 +1,6 @@
-# Chatbot WhatsApp PHP
+# Chatbot to WhatsApp & Telegram PHP
 
-#### Crie facilmente Chatbots para WhatsApp
+#### Crie facilmente Chatbots para WhatsApp & Telegram
 
 ## CONTATO 
  

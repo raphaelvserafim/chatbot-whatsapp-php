@@ -14,7 +14,7 @@ class Send
 
     public function Message($msg)
     {
-        
+
         switch ($this->network) {
             case 'whatsapp':
                 $this->WhatsApp($msg);

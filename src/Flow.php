@@ -17,7 +17,9 @@ class Flow
         $this->model = new Model();
 
         $this->model->phone     = $data["id"];
+
         $this->send->network    = $data["network"];
+        
 
         $check                  = $this->model->checkService();
 
