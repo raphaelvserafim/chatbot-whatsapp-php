@@ -11,7 +11,7 @@ class Send
     public $wpp_key;
     public $phone;
 
-    public function whatsApp($msg)
+    public function Message($msg)
     {
 
         $whatsapp     = new WhatsApp(["server" =>  $this->wpp_server, "key" =>  $this->wpp_key]);
