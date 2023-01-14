@@ -16,9 +16,10 @@ class Flow
         $this->send  = new Send();
         $this->model = new Model();
 
-        $this->model->phone = $data["id"];
-
-        $check              = $this->model->checkService();
+        $this->model->phone     = $data["id"];
+        $this->send->network    = $data["network"];
+        
+        $check                  = $this->model->checkService();
 
         if (sizeof($check["data"]) == 0) {
             $start =  $this->model->startService();
@@ -46,7 +47,7 @@ class Flow
         switch ($stageID) {
 
             case 1:
-                $this->send->Message($this->welcomeMessage(), ['whatsapp', 'telegram']);
+                $this->send->Message($this->welcomeMessage());
 
                 $this->model->changeStage(2);
                 break;
@@ -58,7 +59,7 @@ class Flow
 
 
             default:
-                $this->send->Message([["type" => "text", "message" => "Etapa não encontrada"]], ['whatsapp', 'telegram']);
+                $this->send->Message([["type" => "text", "message" => "Etapa não encontrada"]]);
                 $this->model->endService();
                 break;
         }

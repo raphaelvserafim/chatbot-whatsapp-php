@@ -10,22 +10,19 @@ class Send
     public $wpp_server;
     public $wpp_key;
     public $phone;
+    public $network;
 
-    public function Message($msg, $network)
+    public function Message($msg)
     {
+        
+        switch ($this->network) {
+            case 'whatsapp':
+                $this->WhatsApp($msg);
+                break;
 
-        if (sizeof($network) > 0) {
-            for ($i = 0; sizeof($network) > $i; $i++) {
-                switch ($network[$i]) {
-                    case 'whatsapp':
-                        $this->WhatsApp($msg);
-                        break;
-
-                    case 'telegram':
-                        $this->Telegram($msg);
-                        break;
-                }
-            }
+            case 'telegram':
+                $this->Telegram($msg);
+                break;
         }
     }
 
