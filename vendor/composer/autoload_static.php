@@ -9,11 +9,16 @@ class ComposerStaticInit2edd0655e37237f2c0bfa7023bb7588f
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (
+            'Cachesistemas\\ClassePhpApiWame\\' => 31,
             'Cachesistemas\\ChatbotWhatsappPhp\\' => 33,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Cachesistemas\\ClassePhpApiWame\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cachesistemas/classephpapiwame/src',
+        ),
         'Cachesistemas\\ChatbotWhatsappPhp\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

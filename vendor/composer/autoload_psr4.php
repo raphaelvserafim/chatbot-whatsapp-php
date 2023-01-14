@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Cachesistemas\\ClassePhpApiWame\\' => array($vendorDir . '/cachesistemas/classephpapiwame/src'),
     'Cachesistemas\\ChatbotWhatsappPhp\\' => array($baseDir . '/src'),
 );
