@@ -17,6 +17,10 @@ class Bot
     public function __construct()
     {
         $data       = file_get_contents('php://input');
+
+
+        $this->createLog('php-input', $data);
+
         if (isset($data)) {
             $data   = json_decode($data, true);
         }
