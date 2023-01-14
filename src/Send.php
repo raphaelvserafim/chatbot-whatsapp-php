@@ -8,7 +8,7 @@ use Cachesistemas\ClassePhpApiWame\WhatsApp;
 class Send
 {
     public $wpp_server;
-    public $wpp_key;
+    public $key;
     public $phone;
     public $network;
 
@@ -31,7 +31,7 @@ class Send
     public function WhatsApp($msg)
     {
 
-        $whatsapp     = new WhatsApp(["server" =>  $this->wpp_server, "key" =>  $this->wpp_key]);
+        $whatsapp     = new WhatsApp(["server" =>  $this->wpp_server, "key" =>  $this->key]);
 
         if (sizeof($msg) > 0) {
 
