@@ -2,15 +2,25 @@
 
 namespace Cachesistemas\ChatbotWhatsappPhp;
 
+/*
 use NLTK\NLTK;
 use Rasa\Rasa;
 use SentimentAnalysis\SentimentAnalysis;
 
+*/
+
+use Cachesistemas\ChatbotWhatsappPhp\Flow;
 
 class Bot
 {
-    public $wpp_server;
-    public $wpp_key;
+
+    public function __construct()
+    {
+        $data       = file_get_contents('php://input');
+        if (isset($data)) {
+            $data   = json_decode($data, true);
+        }
+    }
 
 
 
@@ -20,8 +30,8 @@ class Bot
         fwrite($fp, "\n\n\n\n" . json_encode($logs) . "\n\n\n");
         fclose($fp);
     }
-    
 
+    /*
     public function NLTK()
     {
 
@@ -48,4 +58,6 @@ class Bot
 
         print_r($result);
     }
+
+    */
 }

@@ -11,6 +11,9 @@ class Flow
     public $send;
     public $model;
 
+    public $text;
+    public $option;
+
     public function __construct($data)
     {
         $this->send  = new Send();
@@ -19,7 +22,7 @@ class Flow
         $this->model->phone     = $data["id"];
 
         $this->send->network    = $data["network"];
-        
+
 
         $check                  = $this->model->checkService();
 
