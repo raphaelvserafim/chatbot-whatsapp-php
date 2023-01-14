@@ -20,6 +20,10 @@ class Send
                     case 'whatsapp':
                         $this->WhatsApp($msg);
                         break;
+
+                    case 'telegram':
+                        $this->Telegram($msg);
+                        break;
                 }
             }
         }
@@ -97,5 +101,10 @@ class Send
                 }
             }
         }
+    }
+
+
+    public function Telegram($msg)
+    {
     }
 }
