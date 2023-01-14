@@ -24,7 +24,7 @@ class Model extends DB
         return   DB::Select("SELECT * FROM tb_attendance WHERE phone  = '$this->phone' AND situation = 1 AND network =  '$this->network' ");
     }
 
-   
+
     public function stage()
     {
         return   DB::Select("SELECT * FROM tb_stage WHERE attendance  =  $this->serviceID  ");
@@ -33,7 +33,7 @@ class Model extends DB
 
     public function startService()
     {
-        return   DB::Query("INSERT INTO  tb_attendance SET  phone  = '$this->phone', situation = 1, network =  '$this->network' ");
+        return   DB::Query("INSERT INTO  tb_attendance SET  phone  = '$this->phone',  network = '$this->network', situation = 1 ");
     }
 
 
@@ -46,7 +46,7 @@ class Model extends DB
 
     public function endService()
     {
-        return   DB::Query("UPDATE tb_attendance SET situation = 0 WHERE phone  = '$this->phone' AND situation = 1 , network =  '$this->network' ");
+        return   DB::Query("UPDATE tb_attendance SET situation = 0 WHERE phone  = '$this->phone' AND  network =  '$this->network'  AND  situation = 1 ");
     }
 
 

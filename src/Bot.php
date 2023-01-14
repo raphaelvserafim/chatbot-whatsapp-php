@@ -23,11 +23,11 @@ class Bot
         if (isset($data)) {
             $data   = json_decode($data, true);
 
-            $this->createLog('php-input', $data);
+            // $this->createLog('php-input', $data);
 
             if (isset($data["instance"]) && isset($data["data"]["key"]["remoteJid"])) {
                 $result  = $this->treatDataWPP($data);
-
+                new Flow($result);
                 $this->createLog('php-input',  $result);
             }
         }
@@ -38,7 +38,7 @@ class Bot
 
         return [
             "network" => "whatsapp",
-            "token_key"=> $data["instance"],
+            "token_key" => $data["instance"],
             "id" => preg_replace('/[^0-9]/', '', $data["data"]["key"]["remoteJid"]),
             "name" => $data["data"]["pushName"],
             "text" => $data["data"]["msgContent"]["conversation"]

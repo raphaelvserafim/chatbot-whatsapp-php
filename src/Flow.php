@@ -22,7 +22,10 @@ class Flow
         $this->model->phone     = $data["id"];
 
         $this->send->key        = $data["token_key"];
+
         $this->send->network    = $data["network"];
+
+        $this->model->network   = $this->send->network;
 
 
         $check                  = $this->model->checkService();
@@ -41,8 +44,11 @@ class Flow
         } else {
             $check                  = $check["data"][0];
             $this->model->serviceID = $check->id;
+            $stage                  = $this->model->stage();
+            $this->stage($stage["data"][0]->stage);
         }
     }
+
 
 
 
