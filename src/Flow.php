@@ -11,14 +11,14 @@ class Flow
     public $send;
     public $model;
 
-    public function __construct($id)
+    public function __construct($data)
     {
         $this->send  = new Send();
         $this->model = new Model();
 
-        $this->model->phone = $id;
+        $this->model->phone = $data["id"];
 
-        $check      = $this->model->checkService();
+        $check              = $this->model->checkService();
 
         if (sizeof($check["data"]) == 0) {
             $start =  $this->model->startService();
