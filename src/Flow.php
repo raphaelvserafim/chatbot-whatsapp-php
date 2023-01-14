@@ -18,7 +18,7 @@ class Flow
 
         $this->model->phone     = $data["id"];
         $this->send->network    = $data["network"];
-        
+
         $check                  = $this->model->checkService();
 
         if (sizeof($check["data"]) == 0) {
@@ -54,7 +54,8 @@ class Flow
 
 
             case 2:
-
+                $this->send->Message($this->justTest());
+                $this->model->endService();
                 break;
 
 
@@ -71,6 +72,14 @@ class Flow
 
         $msg = [];
         array_push($msg, ["type" => "text", "message" => "Olá seja bem vindo(a)"]);
+        return $msg;
+    }
+
+
+    public function justTest()
+    {
+        $msg = [];
+        array_push($msg, ["type" => "text", "message" => "Isso é apenas um teste vou encerrar a conversa"]);
         return $msg;
     }
 }
