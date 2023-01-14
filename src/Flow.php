@@ -23,8 +23,14 @@ class Flow
         if (sizeof($check["data"]) == 0) {
             $start =  $this->model->startService();
             if ($start["status"]) {
-                $this->stage(1);
-            }  
+                $check  = $this->model->checkService();
+                if (sizeof($check["data"]) >  0) {
+                    $check                  = $check["data"][0];
+                    $this->model->serviceID = $check->id;
+                    $this->model->startStep();
+                    $this->stage(1);
+                }
+            }
         } else {
             $check                  = $check["data"][0];
             $this->model->serviceID = $check->id;
