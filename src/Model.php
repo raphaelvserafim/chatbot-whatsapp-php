@@ -11,7 +11,7 @@ class Model extends DB
     public $dateTimeNow;
     public $serviceID;
     public $stageID;
-
+    public $network;
 
     public function __construct()
     {
@@ -21,24 +21,19 @@ class Model extends DB
 
     public function checkService()
     {
-        return   DB::Select("SELECT * FROM tb_attendance WHERE phone  = '$this->phone' AND situation = 1 ");
+        return   DB::Select("SELECT * FROM tb_attendance WHERE phone  = '$this->phone' AND situation = 1 AND network =  '$this->network' ");
     }
 
-    public function startService()
-    {
-        return   DB::Query("INSERT INTO  tb_attendance SET  phone  = '$this->phone', situation = 1 ");
-    }
-
-
-    public function endService()
-    {
-        return   DB::Query("UPDATE tb_attendance SET situation = 0 WHERE phone  = '$this->phone' AND situation = 1 ");
-    }
-
-
+   
     public function stage()
     {
         return   DB::Select("SELECT * FROM tb_stage WHERE attendance  =  $this->serviceID  ");
+    }
+
+
+    public function startService()
+    {
+        return   DB::Query("INSERT INTO  tb_attendance SET  phone  = '$this->phone', situation = 1, network =  '$this->network' ");
     }
 
 
@@ -47,9 +42,16 @@ class Model extends DB
         return   DB::Query("INSERT INTO  tb_stage SET  attendance  = $this->serviceID , stage = 1 ");
     }
 
+
+
+    public function endService()
+    {
+        return   DB::Query("UPDATE tb_attendance SET situation = 0 WHERE phone  = '$this->phone' AND situation = 1 , network =  '$this->network' ");
+    }
+
+
     public function changeStage(int $stage)
     {
         return   DB::Query("UPDATE tb_stage SET  stage  = $stage  WHERE attendance  = $this->serviceID  ");
     }
-
 }
