@@ -19,11 +19,29 @@ class Bot
         $data       = file_get_contents('php://input');
 
 
-        $this->createLog('php-input', $data);
 
         if (isset($data)) {
             $data   = json_decode($data, true);
+
+            $this->createLog('php-input', $data);
+
+            if (isset($data["instance"]) && isset($data["data"]["key"]["remoteJid"])) {
+                $result  = $this->treatDataWPP($data);
+
+                $this->createLog('php-input',  $result);
+
+            }
         }
+    }
+
+    public function treatDataWPP($data)
+    {
+
+        return [
+            "id" => $data["data"]["key"]["remoteJid"],
+            "name" => $data["data"]["pushName"],
+            "text" =>  $data["data"]["msgContent"]["conversation"]
+        ];
     }
 
 
