@@ -38,6 +38,7 @@ class Bot
 
         return [
             "network" => "whatsapp",
+            "token_key"=> $data["instance"],
             "id" => preg_replace('/[^0-9]/', '', $data["data"]["key"]["remoteJid"]),
             "name" => $data["data"]["pushName"],
             "text" => $data["data"]["msgContent"]["conversation"]

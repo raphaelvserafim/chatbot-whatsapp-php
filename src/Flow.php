@@ -21,6 +21,7 @@ class Flow
 
         $this->model->phone     = $data["id"];
 
+        $this->send->key        = $data["token_key"];
         $this->send->network    = $data["network"];
 
 
