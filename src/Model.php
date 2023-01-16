@@ -21,13 +21,13 @@ class Model extends DB
 
     public function checkService()
     {
-        return   DB::Select("SELECT * FROM tb_attendance WHERE phone  = '$this->phone' AND situation = 1 AND network =  '$this->network' ");
+        return   DB::Select("SELECT * FROM tb_attendance USE INDEX(phone)  WHERE phone  = '$this->phone' AND situation = 1 AND network =  '$this->network' ");
     }
 
 
     public function stage()
     {
-        return   DB::Select("SELECT * FROM tb_stage WHERE attendance  =  $this->serviceID  ");
+        return   DB::Select("SELECT * FROM tb_stage USE INDEX(attendance)  WHERE attendance  =  $this->serviceID  ");
     }
 
 
