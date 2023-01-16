@@ -22,6 +22,7 @@ class Flow
         $this->model->phone     = $data["id"];
 
         $this->send->key        = $data["token_key"];
+        $this->send->wpp_server = 'https://server.api-wa.me';
 
         $this->send->network    = $data["network"];
 
