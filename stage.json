@@ -1,0 +1,10 @@
+{
+    "stage": "1",
+    "msgs": [
+        {
+            "type": "text",
+            "msg": "Olá seja bem vindo(a)"
+        }
+    ],
+    "end": 0
+}
