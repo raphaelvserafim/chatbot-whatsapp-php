@@ -15,6 +15,7 @@ class Send
     public function Message($msg)
     {
 
+
         switch ($this->network) {
             case 'whatsapp':
                 $this->WhatsApp($msg);
@@ -31,71 +32,81 @@ class Send
     public function WhatsApp($msg)
     {
 
-        $whatsapp     = new WhatsApp(["server" =>  $this->wpp_server, "key" =>  $this->key]);
-
-        if (sizeof($msg) > 0) {
-
-            for ($i = 0; sizeof($msg) > $i; $i++) {
-
-                switch ($msg[$i]["type"]) {
-
-                    case 'text':
-                        $whatsapp->sendPresence($this->phone, 'composing');
-                        sleep(2);
-                        $whatsapp->sendText($this->phone, $msg[$i]["message"]);
-                        break;
+        if (isset($this->phone)) {
 
 
-                    case 'audio':
-                        $whatsapp->sendPresence($this->phone, 'recording');
-                        sleep(2);
-                        $whatsapp->sendAudio($this->phone, $msg[$i]["url"], true);
-                        break;
+            $whatsapp     = new WhatsApp(["server" =>  $this->wpp_server, "key" =>  $this->key]);
+
+            if (sizeof($msg) > 0) {
 
 
-                    case 'image':
-                        $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'image', $msg[$i]["caption"]);
-                        break;
+                $logs = [];
 
-                    case 'video':
-                        $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'video', $msg[$i]["caption"]);
-                        break;
-
-                    case 'document':
-                        $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'document', $msg[$i]["caption"]);
-                        break;
-
-                    case 'button':
-                        $whatsapp->sendButton([
-                            "to" => $this->phone,
-                            "data" => [
-                                "text" => $msg[$i]["title"],
-                                "buttons" =>  $msg[$i]["buttons"],
-                                "footerText" => $msg[$i]["footer"]
-                            ]
-                        ]);
-                        break;
+                for ($i = 0; sizeof($msg) > $i; $i++) {
 
 
-                    case 'list':
-                        $body = [
-                            "messageData" => [
+                    switch ($msg[$i]["type"]) {
+
+                        case 'text':
+                            $logs[] =  $whatsapp->sendPresence($this->phone, 'composing');
+                            sleep(2);
+                            $logs[] =  $whatsapp->sendText($this->phone, $msg[$i]["message"]);
+                            break;
+
+
+                        case 'audio':
+                            $logs[] = $whatsapp->sendPresence($this->phone, 'recording');
+                            sleep(2);
+                            $logs[] =   $whatsapp->sendAudio($this->phone, $msg[$i]["url"], true);
+                            break;
+
+
+                        case 'image':
+                            $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'image', $msg[$i]["caption"]);
+                            break;
+
+                        case 'video':
+                            $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'video', $msg[$i]["caption"]);
+                            break;
+
+                        case 'document':
+                            $whatsapp->sendMedia($this->phone, $msg[$i]["url"], 'document', $msg[$i]["caption"]);
+                            break;
+
+                        case 'button':
+                            $whatsapp->sendButton([
                                 "to" => $this->phone,
-                                "buttonText" => $msg[$i]["name"],
-                                "text" => " ",
-                                "title" => $msg[$i]["title"],
-                                "description" => $msg[$i]["footer"],
-                                "sections" =>  $msg[$i]["sections"],
-                                "listType" => 0
-                            ]
-                        ];
-                        $whatsapp->sendList($body);
-                        break;
+                                "data" => [
+                                    "text" => $msg[$i]["title"],
+                                    "buttons" =>  $msg[$i]["buttons"],
+                                    "footerText" => $msg[$i]["footer"]
+                                ]
+                            ]);
+                            break;
 
-                    case 'contact':
-                        $whatsapp->sendContact($this->phone, $msg[$i]["name"], $msg[$i]["number"]);
-                        break;
+
+                        case 'list':
+                            $body = [
+                                "messageData" => [
+                                    "to" => $this->phone,
+                                    "buttonText" => $msg[$i]["name"],
+                                    "text" => " ",
+                                    "title" => $msg[$i]["title"],
+                                    "description" => $msg[$i]["footer"],
+                                    "sections" =>  $msg[$i]["sections"],
+                                    "listType" => 0
+                                ]
+                            ];
+                            $whatsapp->sendList($body);
+                            break;
+
+                        case 'contact':
+                            $whatsapp->sendContact($this->phone, $msg[$i]["name"], $msg[$i]["number"]);
+                            break;
+                    }
                 }
+
+                $this->createLog('send-log',  $logs);
             }
         }
     }
@@ -104,5 +115,12 @@ class Send
     public function Telegram($msg)
     {
         // EM BREVE
+    }
+
+    public function createLog($name, $logs)
+    {
+        $fp = fopen($name . '.json', "a+");
+        fwrite($fp, "\n\n\n\n" . $logs  . "\n\n\n");
+        fclose($fp);
     }
 }
